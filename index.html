@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mega Show</title>
+  <link href="/static/bootstrap-5.3.2/css/bootstrap.css" rel="stylesheet">
+  <script src="/static/bootstrap-5.3.2/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/jquery-3.6.0.js"></script>
+  <script src="/static/js/echarts.min.js"></script>
+  <style>
+    .select-set {
+      width: 20% !important;
+      min-width: 150px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="row m-0 py-4">
+    <div class="col-lg-6">
+      <select id="personTime" class="form-select select-set" placeholder="Please Select" onchange="getPersonTime(this.value)">
+        <option value="1">PART 1</option>
+        <option value="2">PART 2</option>
+      </select>
+      <div id="barPersonTime" style="width: 100%; height: 400px"></div>
+    </div>
+    <div class="col-lg-6">
+      <select id="humanTraffic" class="form-select select-set" placeholder="Please Select" onchange="getHumanTraffic(this.value)">LineData(this.value)">
+        <option value="2">PART 1</option>
+        <option value="3">PART 2</option>
+      </select>
+      <div id="barHumanTraffic" style="width: 100%; height: 400px"></div>
+    </div>
+    <div class="col-lg-6">
+      <select id="sumPerson" class="form-select select-set" placeholder="Please Select" onchange="getSumPerson(this.value)">LineData(this.value)">
+        <option value="1">SUM</option>
+        <option value="2">PART 1</option>
+        <option value="3">PART 2</option>
+      </select>
+      <div id="barSumPerson" style="width: 100%; height: 500px"></div>
+    </div>
+    
+    <div class="col-lg-6">
+      <select id="barTop" class="form-select select-set" placeholder="Please Select" onchange="getBarTop(this.value)">
+        <option value="1">SUM</option>
+        <option value="2">PART 1</option>
+        <option value="3">PART 2</option>
+      </select>
+      <div id="chartBarTop" style="width: 100%; height: 500px"></div>
+    </div>
+    <div class="col-lg-12">
+      <select id="pieTop" class="form-select select-set" placeholder="Please Select" onchange="getPieTop(this.value)">
+        <option value="1">SUM</option>
+        <option value="2">PART 1</option>
+        <option value="3">PART 2</option>
+      </select>
+      <div id="chartPieTop" style="width: 100%; height: 600px"></div>
+    </div>
+  </div>
+
+  <script src="./static/js/echarts-report.js"></script>
+</body>
+</html>
