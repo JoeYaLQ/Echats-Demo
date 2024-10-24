@@ -1,7 +1,7 @@
 
 // utils.js
 function loadHeader() {
-  $("#headerContent").load("/header.html");
+  $("#headerContent").load("../../header.html");
 }
 
 function loadFooter() {
