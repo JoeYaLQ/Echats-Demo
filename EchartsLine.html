@@ -19,7 +19,7 @@
 </head>
 <body>
   <div id="headerContent" class=""></div>
-  <script type="text/javascript">init()</script>
+  <script type="text/javascript">  $("#headerContent").load("./header.html");  </script>
   <div class="row m-0 py-4">
     <div class="col-lg-6">
       <select id="Line" class="form-select select-set" placeholder="Please Select" onchange="getLine(this.value)">
