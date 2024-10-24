@@ -201,6 +201,15 @@
           681807,
           743233,
         ],
+        // markPoint: {
+        //   data: [
+        //     { name: 'Max', value: 182.2, xAxis: 7, yAxis: 183 },
+        //     { name: 'Min', value: 2.3, xAxis: 11, yAxis: 3 }
+        //   ]
+        // },
+        markLine: {
+          data: [{ type: 'average', name: 'Avg' }]
+        },
         label: {
           position: 'inside',
           show: true
