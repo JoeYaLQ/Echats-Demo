@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zn">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,7 @@
   <script src="./static/bootstrap-5.3.2/js/bootstrap.bundle.min.js"></script>
   <script src="./static/js/jquery-3.6.0.js"></script>
   <script src="./static/js/echarts.min.js"></script>
+  <script src="./static/js/utils.js"></script>
   <style>
     .select-set {
       width: 20% !important;
@@ -17,6 +18,8 @@
   </style>
 </head>
 <body>
+  <div id="headerContent" class=""></div>
+  <script type="text/javascript">init()</script>
   <div class="row m-0 py-4">
     <div class="col-lg-6">
       <select id="Line" class="form-select select-set" placeholder="Please Select" onchange="getLine(this.value)">
@@ -36,5 +39,8 @@
   </div>
 
   <script src="./static/js/line-charts.js"></script>
+  <script type="text/javascript">
+    init()
+  </script>
 </body>
 </html>

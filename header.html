@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mega Show</title>
+  <link href="./static/bootstrap-5.3.2/css/bootstrap.css" rel="stylesheet">
+  <script src="./static/bootstrap-5.3.2/js/bootstrap.bundle.min.js"></script>
+  <script src="./static/js/jquery-3.6.0.js"></script>
+  <script src="./static/js/echarts.min.js"></script>
+  <style>
+  </style>
+</head>
+<body>
+  
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">❤Joe🐟</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./EchartsLine.html">Line</a>
+          </li>
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Link
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li> -->
+        </ul>
+        <form class="d-flex" role="search" disabled="true">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+    <!-- <script type="text/javascript">
+    // 高亮导航栏
+    function highlightMenu (){
+      // 获取页面路径
+      var pathname = window.location.pathname;
+      var lastPart = pathname.split("/").pop();
+      // 获取导航栏页面
+      var navItems = document.querySelectorAll(".font-bw");
+      var downItems = document.querySelectorAll(".dropdown-item");
+  
+      for (var i = 0; i < navItems.length; i++) {
+        var isDown = true
+        var navItem = navItems[i];
+        var navHref = navItem.getAttribute("href");
+        var navHrefLastPart = navHref.split("/").pop();
+        if (navHrefLastPart === lastPart) {
+          navItem.classList.add("active-text");
+          isDown = false
+          break  
+        } 
+      }
+      // 是否已存在激活栏
+      if (isDown){
+        for (var i = 0; i < downItems.length; i++) {
+          var downItem = downItems[i];
+          var downHref = downItem.getAttribute("href");
+          var downHrefLastPart = downHref.split("/").pop();
+          if (downHrefLastPart === lastPart ) {
+            downItem.classList.add("active");
+            break  
+          } 
+        }
+      }
+    }
+    // 多语言初始化
+    function initI18n(){
+      /*默认语言*/
+      var defaultLang;
+      let local = localStorage.getItem("lang");
+      
+      if(!local){
+        defaultLang = "en";
+        localStorage.setItem("lang", defaultLang);
+      } else {
+        defaultLang = local;
+      }
+      $("[i18n]").i18n({
+        defaultLang: defaultLang,
+        filePath: "/static/js/i18n/",
+        filePrefix: "i18n_",
+        fileSuffix: "",
+        forever: true,
+      });
+      $(".english, .tcglish, .chinese").click(function() {
+        const lang = $(this).data("lang");
+        $("[i18n]").i18n({
+          defaultLang: lang,
+          filePath: "/static/js/i18n/",
+        });
+        defaultLang = lang;
+        localStorage.setItem("lang", defaultLang);
+        let path = window.location.pathname.split("/").pop().replace(".html", "")
+        if (path == 'venue') location.reload();
+      });
+    }
+    // 激活链接
+    function activateLink() {
+      // 获取所有的链接元素
+      const links = document.querySelectorAll('.a-link');
+      const currentLang = localStorage.getItem('lang') || 'en'; 
+      // 激活当前页面语言链接
+      links.forEach(link => {
+        if (link.getAttribute('data-lang') === currentLang) {
+            link.classList.add('text-primary');
+        }
+      });
+      // 为每个链接元素添加点击事件监听器
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          links.forEach(l => l.classList.remove('text-primary'));
+          link.classList.add('text-primary');
+        });
+      });
+    }
+    //设置鼠标悬停展开下拉菜单
+    function dropdownOpen(){
+      $('.dropdown').mouseover(function(){
+        $(this).find(".dropdown-menu").attr('data-bs-popper', 'static');
+        $(this).find(".fw-semibold").attr('aria-expanded', 'true');
+        $(this).find(".fw-semibold").addClass('show');
+        $(this).find(".dropdown-menu").addClass('show');
+      }).mouseout(function(){
+        $(this).find(".dropdown-menu").removeAttr('data-bs-popper');
+        $(this).find(".fw-semibold").attr('aria-expanded', 'false');
+        $(this).find(".fw-semibold").removeClass('show');
+        $(this).find(".dropdown-menu").removeClass('show');
+      });
+    }
+    activateLink();
+    highlightMenu();
+    setTimeout(() => initI18n(), 0);
+    dropdownOpen();
+  </script> -->
+</body>
+</html>
