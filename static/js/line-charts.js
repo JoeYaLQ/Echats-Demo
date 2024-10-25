@@ -20,7 +20,7 @@ var option;
     
 // 示例数据  
 var categories = ['27', '28', '29', '30',];  
-var values = [120, 200, 150, 80, 70];  
+var values = [110, 120, 132, 101, 134];  
 var sum = values.reduce((a, b) => a + b, 0);  // 计算总和  
 var barHuman = echarts.init(document.getElementById('barHumanTraffic'));
   var i = 0;
@@ -36,7 +36,7 @@ option = {
         //   result += `${param.seriesName}: ${param.value}<br/>`;
         // });
         // return result;
-        console.log(`output->params`,params)
+        // console.log(`output->params`,params)
         return  params[0].name +'日<br/>' +
         '<span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#c23531"></span>'+
         params[0].seriesName+': '+params[0].value+'<br/>' + 
@@ -75,10 +75,10 @@ option = {
       name: '人数',
       data: values,
       label: {  
-        show: true,  
+        show: false,  
         position: 'insideTop',
         formatter: function (params) {  
-          console.log(params)
+          // console.log(params)
             var percent = (params.value / sum * 100).toFixed(2) + '%';  
             var labelValue = '';
             labelValue += 
@@ -88,7 +88,29 @@ option = {
               '百分比: ' + percent + '\n';
             return labelValue;  
         },
-      }
+      },
+      markPoint:{
+        position: 'right',
+        symbolSize: 1,
+        symbolOffset: [0, '50%'],
+        label:{
+
+          backgroundColor: 'rgb(242,242,242)',
+          borderColor: '#aaa',
+          borderWidth: 1,
+          borderRadius: 4,
+          padding: [4, 10],
+          lineHeight: 26,
+          show: true,
+
+          distance: 20,
+          // formatter: '{c}',
+          formatter:function(params){
+            console.log(`output->`,params.value)
+            return params.value ;
+          }
+        }
+      },
     },
     {  
       type: 'bar',
@@ -98,7 +120,7 @@ option = {
         show: true,  
         // position: 'insideTop',
         formatter: function (params) {  
-          console.log(params)
+          // console.log(params)
             var percent = (params.value / sum * 100).toFixed(2) + '%';  
             var labelValue = '';
             labelValue += 
@@ -119,10 +141,8 @@ function getBar(value) {
   if(value == '1') {
     values = [120, 200, 150, 80, 70];  
   } else if(value == '2'){
-    console.log(`output->2`,2)
     values = [10, 30, 25, 40, 60];
   } else {
-    console.log(`output->3`,3)
     values = [10, 20, 15, 30, 40];
   }
   barHuman.setOption({ 

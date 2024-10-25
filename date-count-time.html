@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mega Show</title>
+<link href="./static/bootstrap-5.3.2/css/bootstrap.css" rel="stylesheet">
+<script src="./static/bootstrap-5.3.2/js/bootstrap.bundle.min.js"></script>
+<script src="./static/js/jquery-3.6.0.js"></script>
+<script src="./static/js/echarts.min.js"></script>
+<script src="./static/js/utils.js"></script>
+<style>
+    .select-set {
+        width: 20% !important;
+        min-width: 150px;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+<div id="container" style="height: 500px;width: 100%;padding: 50px 20px;"></div>
+<p></p>
+    
+<script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false
+    });
+    var option = {
+        // 提示词
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow',
+                label: {
+                    show: true
+                }
+            }
+        },
+        // 工具箱
+        toolbox: {
+            show: true,
+            feature: {
+                mark: { show: true },
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        legend: { },
+        grid: {
+            top: 50,
+            left: 10,
+            bottom: 50,
+            containLabel : true,
+        },
+        xAxis: {
+            type: 'category',
+            data: ['2024-10-04','2024-10-05','2024-10-06','2024-10-10','2024-10-13 20:00:00','2024-10-17 1:00:00','2024-10-23 23:00:00' ]
+        },
+        yAxis: {
+            type: 'value',
+            name: 'time(h)',
+            axisLine: {
+                show: true,
+            },
+        },  
+        dataZoom: [
+            {
+                show: true,
+                start: 0,
+                end: 100
+            },
+        ],
+        series: [
+            {
+                name: 'Frequency',
+                type: 'bar',
+                data: [0.75,0.8,2.5,1.25,3,2,1.5, ]
+            },
+        ]
+    };
+    myChart.setOption(option);
+    // 更改P标签的内容
+    // 获取当前时间并输出格式为yyyy-mm-dd hh:mm:ss
+    var now = new Date();
+    now.setDate(now.getDate());
+    var year = now.getFullYear();
+    var month = now.getMonth()+1;
+    if (month < 10) {
+        month = '0' + month;
+    }
+    var day = now.getDate();
+    if (day < 10) {
+        day = '0' + day;
+    }
+    var hour = now.getHours();
+    if (hour < 10) {
+        hour = '0' + hour;
+    }
+    var minute = now.getMinutes();
+    if (minute < 10) {
+        minute = '0' + minute;
+    }
+    var second = now.getSeconds();
+    if (second < 10) {
+        second = '0' + second;
+    }
+    var nowTime = year + '-' + month + '-' + day 
+    // + ' ' + hour + ':' + minute + ':' + second;
+
+    var p = document.getElementsByTagName('p')[0];
+    p.innerHTML = '当前显示数据：' + option.xAxis.data[0] + ' To ' + nowTime + '--' + option.xAxis.data.length;
+    window.addEventListener('resize', myChart.resize);
+</script>
+</body>
+</html>
