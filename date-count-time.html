@@ -10,16 +10,21 @@
 <script src="./static/js/echarts.min.js"></script>
 <script src="./static/js/utils.js"></script>
 <style>
-    .select-set {
-        width: 20% !important;
-        min-width: 150px;
-        margin-bottom: 10px;
-    }
+    
 </style>
 </head>
 <body>
-<div id="container" style="height: 500px;width: 100%;padding: 50px 20px;"></div>
-<p></p>
+
+    <div id="headerContent"></div>
+    <script type="text/javascript">  $("#headerContent").load("./header.html");  </script>
+    <div id="container" style="height: 500px;width: 100%;padding: 30px 20px;"></div>
+    <div class="px-4 pb-5">
+        <h3 class="fw-bold">当前显示数据：</h3>
+        <p class="operationDate"></p>
+        <p class="W"></p>
+        <p class="Y"></p>
+        <p class="sum"></p>
+    </div>
     
 <script type="text/javascript">
     var dom = document.getElementById('container');
@@ -142,9 +147,12 @@
     const ya = duration.filter(item => typeof item === 'object' && item !== null).length;
     console.log(`output->ya `,ya,operationDate.length )
     const wang = operationDate.length - ya
-    var p = document.getElementsByTagName('p')[0];
-    p.innerHTML = '当前显示数据：' + operationDate[0] + ' To ' + nowTime + '--' 
-    + '(' + operationDate.length + ')' + 'ya：' + ya + '，' + 'wang：' + wang + ' . ';
+    
+    $('.operationDate').html('时间段：' + operationDate[0] + ' To ' + nowTime)
+    $('.Y').html('🐇：' + ya)
+    $('.W').html('🐉：' + wang)
+    $('.sum').html('🐇+🐉：' + operationDate.length)
+    
     window.addEventListener('resize', myChart.resize);
 </script>
 </body>
