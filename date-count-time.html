@@ -9,6 +9,8 @@
 <script src="./static/js/jquery-3.6.0.js"></script>
 <script src="./static/js/echarts.min.js"></script>
 <script src="./static/js/utils.js"></script>
+<!--引|入Day.js库 -->
+<script src="https://unpkg.com/dayjs"></script>
 <style>
     
 </style>
@@ -21,9 +23,11 @@
     <div class="px-4 pb-5">
         <h3 class="fw-bold">当前显示数据：</h3>
         <p class="operationDate"></p>
-        <p class="W"></p>
-        <p class="Y"></p>
-        <p class="sum"></p>
+        <p class="cumDays"></p>
+        <p class="avg"></p>
+        <span class="W p-2 border border-2 border-primary rounded-3"></span>
+        <span class="Y p-2 border border-2 border-primary rounded-3 mx-3"></span>
+        <span class="sum p-2 border border-2 border-primary rounded-3"></span>
     </div>
     
 <script type="text/javascript">
@@ -37,7 +41,7 @@
         '2024-11-10 03:33:59','2024-11-10 15:33:59','2024-11-15 5:33:59',
         '2024-11-16 00:33:59','2024-11-23 03:33:59','2024-11-24 22:53:59',
         '2024-11-26 00:23:59','2024-11-30 15:03:59','2024-12-01 11:13:59',
-        '2024-12-02 00:13:59',
+        '2024-12-02 00:13:59','2024-12-07 10:55:59','2024-12-09 00:13:59',
     ];
     // 时长数据
     var duration =[
@@ -52,7 +56,9 @@
         -0.5,-1,
         { value: 0.25, itemStyle: { color: '#f12edf' }},
         { value: 0.8, itemStyle: { color: '#f12edf' }},
-        -1
+        -1,
+        { value: 0.8, itemStyle: { color: '#f12edf' }},
+        -1.25,
     ];
     console.log(`output->`,duration)
     var myChart = echarts.init(dom, null, {
@@ -123,39 +129,43 @@
     myChart.setOption(option);
     // 更改P标签的内容
     // 获取当前时间并输出格式为yyyy-mm-dd hh:mm:ss
-    var now = new Date();
-    now.setDate(now.getDate());
-    var year = now.getFullYear();
-    var month = now.getMonth()+1;
-    if (month < 10) {
-        month = '0' + month;
-    }
-    var day = now.getDate();
-    if (day < 10) {
-        day = '0' + day;
-    }
-    var hour = now.getHours();
-    if (hour < 10) {
-        hour = '0' + hour;
-    }
-    var minute = now.getMinutes();
-    if (minute < 10) {
-        minute = '0' + minute;
-    }
-    var second = now.getSeconds();
-    if (second < 10) {
-        second = '0' + second;
-    }
-    var nowTime = year + '-' + month + '-' + day 
+    // var now = new Date();
+    // now.setDate(now.getDate());
+    // var year = now.getFullYear();
+    // var month = now.getMonth()+1;
+    // if (month < 10) {
+    //     month = '0' + month;
+    // }
+    // var day = now.getDate();
+    // if (day < 10) {
+    //     day = '0' + day;
+    // }
+    // var hour = now.getHours();
+    // if (hour < 10) {
+    //     hour = '0' + hour;
+    // }
+    // var minute = now.getMinutes();
+    // if (minute < 10) {
+    //     minute = '0' + minute;
+    // }
+    // var second = now.getSeconds();
+    // if (second < 10) {
+    //     second = '0' + second;
+    // }
+    // var nowTime = year + '-' + month + '-' + day 
+    
     // + ' ' + hour + ':' + minute + ':' + second;
     const ya = duration.filter(item => typeof item === 'object' && item !== null).length;
     console.log(`output->ya `,ya,operationDate.length )
     const wang = operationDate.length - ya
     
-    $('.operationDate').html('时间段：' + operationDate[0] + ' To ' + nowTime)
-    $('.Y').html('🐇：' + ya)
-    $('.W').html('🐉：' + wang)
-    $('.sum').html('🐇+🐉：' + operationDate.length)
+    // $('.operationDate').html('时间段：' + operationDate[0] + ' To ' + nowTime)
+    $('.operationDate').html('时间段：' + operationDate[0] + ' to ' + dayjs().format("YYYY-MM-DD") + ' ; ' )
+    $('.cumDays').html('累计天数：' + dayjs().diff(operationDate[0],'day') + ' ; ' )
+    $('.avg').html('平均值：' + dayjs().diff(operationDate[0],'day') / operationDate.length + ' ; ')
+    $('.Y').html('🐇：' + ya + ' ; ')
+    $('.W').html('🐉：' + wang + ' ; ')
+    $('.sum').html('🐇+🐉：' + operationDate.length + ' ; ')
     
     window.addEventListener('resize', myChart.resize);
     init()
