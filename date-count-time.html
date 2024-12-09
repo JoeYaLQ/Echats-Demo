@@ -24,7 +24,8 @@
         <h3 class="fw-bold">当前显示数据：</h3>
         <p class="operationDate"></p>
         <p class="cumDays"></p>
-        <p class="avg"></p>
+        <p class="avg"></p> 
+        <p class="lastTime"></p>
         <span class="W p-2 border border-2 border-primary rounded-3"></span>
         <span class="Y p-2 border border-2 border-primary rounded-3 mx-3"></span>
         <span class="sum p-2 border border-2 border-primary rounded-3"></span>
@@ -160,9 +161,13 @@
     const wang = operationDate.length - ya
     
     // $('.operationDate').html('时间段：' + operationDate[0] + ' To ' + nowTime)
-    $('.operationDate').html('时间段：' + operationDate[0] + ' to ' + dayjs().format("YYYY-MM-DD") + ' ; ' )
-    $('.cumDays').html('累计天数：' + dayjs().diff(operationDate[0],'day') + ' ; ' )
-    $('.avg').html('平均值：' + dayjs().diff(operationDate[0],'day') / operationDate.length + ' ; ')
+    // 时间区间用英文怎么写
+
+    $('.operationDate').html('Duration：' + operationDate[0] + ' to ' + dayjs().format("YYYY-MM-DD") + ' ; ' )
+    $('.cumDays').html('Cumulative days：' + dayjs().diff(operationDate[0],'day') + ' ; ' )
+    $('.avg').html('SVG：' + dayjs().diff(operationDate[0],'day') / operationDate.length + ' ; ')
+    // 距离上一次时间间隔 用 dayjs把operationDate.at(-1)的值转换为时间对象在进行格式化处理，计算其差值
+    $('.lastTime').html('lastTime：' + dayjs().diff(dayjs(operationDate.at(-1)).format('YYYY-MM-DD'),'day') + ' ; ')
     $('.Y').html('🐇：' + ya + ' ; ')
     $('.W').html('🐉：' + wang + ' ; ')
     $('.sum').html('🐇+🐉：' + operationDate.length + ' ; ')
