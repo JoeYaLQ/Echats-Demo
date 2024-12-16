@@ -28,8 +28,8 @@
         <p class="lastTime"></p>
         <span class="W p-2 border border-2 border-primary rounded-3"></span>
         <span class="Y p-2 border border-2 border-primary rounded-3 mx-3"></span>
-        <span class="sum p-2 border border-2 border-primary rounded-3"></span>
         <span class="dream p-2 border border-2 border-primary rounded-3 mx-3">😴：1 ;</span>
+        <span class="sum p-2 border border-2 border-primary rounded-3"></span>
     </div>
     
 <script type="text/javascript">
@@ -132,36 +132,21 @@
     };
     myChart.setOption(option);
     // 更改P标签的内容
-    // 获取当前时间并输出格式为yyyy-mm-dd hh:mm:ss
-    // var now = new Date();
-    // now.setDate(now.getDate());
-    // var year = now.getFullYear();
-    // var month = now.getMonth()+1;
-    // if (month < 10) {
-    //     month = '0' + month;
-    // }
-    // var day = now.getDate();
-    // if (day < 10) {
-    //     day = '0' + day;
-    // }
-    // var hour = now.getHours();
-    // if (hour < 10) {
-    //     hour = '0' + hour;
-    // }
-    // var minute = now.getMinutes();
-    // if (minute < 10) {
-    //     minute = '0' + minute;
-    // }
-    // var second = now.getSeconds();
-    // if (second < 10) {
-    //     second = '0' + second;
-    // }
-    // var nowTime = year + '-' + month + '-' + day 
-    
-    // + ' ' + hour + ':' + minute + ':' + second;
-    const ya = duration.filter(item => typeof item === 'object' && item !== null).length;
+    var ya = 0;
+    var wy = 0;
+
+    duration.forEach(item => {
+        if (typeof item === 'object' && item.itemStyle && item.itemStyle.color) {
+            if (item.itemStyle.color === '#f12edf') {
+                ya++;
+            } else if (item.itemStyle.color === '#1ba035') {
+                wy++;
+            }
+        }
+    });
+    // const ya = duration.filter(item => typeof item === 'object' && item !== null).length;
     console.log(`output->ya `,ya,operationDate.length )
-    const wang = operationDate.length - ya
+    const wang = operationDate.length - ya - wy;
     
     // $('.operationDate').html('时间段：' + operationDate[0] + ' To ' + nowTime)
     // 时间区间用英文怎么写
@@ -173,7 +158,7 @@
     $('.lastTime').html('lastTime：' + dayjs().diff(dayjs(operationDate.at(-1)).format('YYYY-MM-DD'),'day') + ' ; ')
     $('.Y').html('🐇：' + ya + ' ; ')
     $('.W').html('🐉：' + wang + ' ; ')
-    $('.sum').html('🐇+🐉：' + operationDate.length + ' ; ')
+    $('.sum').html('🐇+🐉+😴：' + operationDate.length + ' ; ')
     // $('.dream').html('😴：' + operationDate.length + ' ; ')
     
     window.addEventListener('resize', myChart.resize);
