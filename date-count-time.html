@@ -28,7 +28,10 @@
         <p class="lastTime"></p>
         <span class="W p-2 border border-2 border-primary rounded-3"></span>
         <span class="Y p-2 border border-2 border-primary rounded-3 mx-3"></span>
-        <span class="dream p-2 border border-2 border-primary rounded-3 mx-3">😴：1 ;</span>
+        <br>
+        <br>
+        <span class="nS p-2 border border-2 border-primary rounded-3"></span>
+        <span class="dream p-2 border border-2 border-primary rounded-3 mx-3"></span>
         <br>
         <br>
         <span class="sum p-2 border border-2 border-primary rounded-3"></span>
@@ -47,6 +50,8 @@
         '2024-11-26 00:23:59','2024-11-30 15:03:59','2024-12-01 11:13:59',
         '2024-12-02 00:13:59','2024-12-07 10:55:59','2024-12-09 00:13:59',
         '2024-12-14 15:00:59','2024-12-15 09:13:59','2024-12-22 00:13:59',
+        '2024-12-28 01:43:59','2024-12-28 11:43:59','2024-12-29 11:13:59',
+        '2024-12-29 0016:30:59',
     ];
     // 时长数据
     var duration =[
@@ -65,7 +70,11 @@
         { value: 0.8, itemStyle: { color: '#f12edf' }},
         -1.25,-1.5,
         { value: 1, itemStyle: { color: '#1ba035' }},
-        -1
+        -1,
+        { value: 0.3, itemStyle: { color: '#f12edf' }},
+        { value: 0.5, itemStyle: { color: '#adb5bd' }},
+        { value: 0.8, itemStyle: { color: '#f12edf' }},
+        { value: 0.5, itemStyle: { color: '#f12edf' }},
     ];
     console.log(`output->`,duration)
     var myChart = echarts.init(dom, null, {
@@ -137,6 +146,7 @@
     // 更改P标签的内容
     var ya = 0;
     var wy = 0;
+    var wangY = 0;
 
     duration.forEach(item => {
         if (typeof item === 'object' && item.itemStyle && item.itemStyle.color) {
@@ -144,25 +154,28 @@
                 ya++;
             } else if (item.itemStyle.color === '#1ba035') {
                 wy++;
+            } else if (item.itemStyle.color === '#adb5bd') {
+                wangY++;
             }
         }
     });
     // const ya = duration.filter(item => typeof item === 'object' && item !== null).length;
     console.log(`output->ya `,ya,operationDate.length )
-    const wang = operationDate.length - ya - wy;
-    
+    const wang = operationDate.length - ya - wy - wangY;
+    const sum = operationDate.length - wangY
     // $('.operationDate').html('时间段：' + operationDate[0] + ' To ' + nowTime)
     // 时间区间用英文怎么写
 
     $('.operationDate').html('Duration：' + operationDate[0] + ' to ' + dayjs().format("YYYY-MM-DD") + ' ; ' )
     $('.cumDays').html('Cumulative days：' + dayjs().diff(operationDate[0],'day') + ' ; ' )
-    $('.avg').html('SVG：' + dayjs().diff(operationDate[0],'day') / operationDate.length + ' ; ')
+    $('.avg').html('SVG：' + dayjs().diff(operationDate[0],'day') / sum + ' ; ')
     // 距离上一次时间间隔 用 dayjs把operationDate.at(-1)的值转换为时间对象在进行格式化处理，计算其差值
     $('.lastTime').html('lastTime：' + dayjs().diff(dayjs(operationDate.at(-1)).format('YYYY-MM-DD'),'day') + ' ; ')
     $('.Y').html('🐇：' + ya + ' ; ')
     $('.W').html('🐉：' + wang + ' ; ')
-    $('.sum').html('🐇+🐉+😴：' + operationDate.length + ' ; ')
-    // $('.dream').html('😴：' + operationDate.length + ' ; ')
+    $('.nS').html('♥️：' + wangY + ' ; ')
+    $('.sum').html('🐇+🐉+😴：' + sum + ' ; ')
+    $('.dream').html('😴：' + wy + ' ; ')
     
     window.addEventListener('resize', myChart.resize);
     init()
