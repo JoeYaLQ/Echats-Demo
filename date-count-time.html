@@ -164,7 +164,6 @@
     const wang = operationDate.length - ya - wy - wangY;
     const sum = operationDate.length - wangY
     // $('.operationDate').html('时间段：' + operationDate[0] + ' To ' + nowTime)
-    // 时间区间用英文怎么写
 
     $('.operationDate').html('Duration：' + operationDate[0] + ' to ' + dayjs().format("YYYY-MM-DD") + ' ; ' )
     $('.cumDays').html('Cumulative days：' + dayjs().diff(operationDate[0],'day') + ' ; ' )
