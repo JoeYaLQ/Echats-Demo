@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>❤Joe🐇</title>
+<link href="./static/bootstrap-5.3.2/css/bootstrap.css" rel="stylesheet">
+<script src="./static/bootstrap-5.3.2/js/bootstrap.bundle.min.js"></script>
+<script src="./static/js/jquery-3.6.0.js"></script>
+<script src="./static/js/echarts.min.js"></script>
+<script src="./static/js/utils.js"></script>
+<!--引|入Day.js库 -->
+<script src="https://unpkg.com/dayjs"></script>
+<style>
+    
+</style>
+</head>
+<body>
+
+    <div id="headerContent"></div>
+    <script type="text/javascript">  $("#headerContent").load("./header.html");  </script>
+    <div id="container" style="height: 500px;width: 100%;padding: 0px 20px;"></div>
+    <div class="px-4 pb-5">
+        <h3 class="fw-bold">当前显示数据：</h3>
+        <p class="lastTime"></p>
+        <p class="count"></p>
+        <span class="W p-2 border border-2 border-primary rounded-3"></span>
+        <span class="Y p-2 border border-2 border-primary rounded-3 mx-3"></span>
+        <br>
+        <br>
+        <span class="sum p-2 border border-2 border-primary rounded-3"></span>
+    </div>
+    
+<script type="text/javascript">
+    var dom = document.getElementById('container');
+    // 操作时间
+    var costDate = [
+        '24.12.27','25.1.3',
+    ];
+    // 时长数据
+    var yaCost = [350,500]
+    var joeCost = [190,350]
+    var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false
+    });
+
+    var option = {
+        // 提示词
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow',
+                label: {
+                    show: true
+                }
+            }
+        },
+        // 工具箱
+        toolbox: {
+            show: true,
+            feature: {
+                mark: { show: true },
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        legend: { },
+        grid: {
+            top: 50,
+            left: 10,
+            bottom: 50,
+            containLabel : true,
+        },
+        xAxis: {
+            type: 'category',
+            name: 'Date',
+            data: costDate,
+        },
+        yAxis: {
+            type: 'value',
+            name: 'costDate(h)',
+            axisLine: {
+                show: true,
+            },
+        },  
+        // dataZoom: [
+        //     {
+        //         show: true,
+        //         start: 0,
+        //         end: 100
+        //     },
+        // ],
+        series: [
+            {
+                name: 'Joe',
+                type: 'line',
+                // type: 'bar',
+                // stack: 'Ad',
+                smooth: true,
+                data: joeCost,
+                label: {
+                    show: true,
+                },
+            },
+            {
+                name: 'Ya',
+                type: 'line',
+                smooth: true,
+                data: yaCost,
+                // stack: 'Ad',
+                label: {
+                    show: true,
+                },
+            },
+        ]
+    };
+    myChart.setOption(option);
+    // 封装 SUM 函数
+    function calculateSum(arr) {
+      return arr.reduce((acc, curr) => acc + curr, 0);
+    }
+    // 距离上一次时间间隔 用 dayjs计算时间其差值
+    $('.lastTime').html('Since the last time we met：' + dayjs().diff('2025-01-05','day') + ' day; ')
+    $('.count').html('meet：' + costDate.length + ' count; ')
+    $('.Y').html('🐇：' + calculateSum(yaCost) + ' ; ')
+    $('.W').html('🐉：' + calculateSum(joeCost) + ' ; ')
+    $('.sum').html('🐇+🐉：' + calculateSum(joeCost.concat(yaCost)) + ' ; ')
+    
+    window.addEventListener('resize', myChart.resize);
+    init()
+</script>
+</body>
+</html>
