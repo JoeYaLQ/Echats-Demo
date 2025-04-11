@@ -127,9 +127,9 @@
     // 距离上一次时间间隔 用 dayjs计算时间其差值
     $('.lastTime').html('Since the last time we met：' + dayjs().diff('2025-04-06','day') + ' day; ')
     $('.count').html('meet：' + costDate.length + ' count; ')
-    $('.Y').html('🐇：' + calculateSum(yaCost) + ' ; ')
-    $('.W').html('🐉：' + calculateSum(joeCost) + ' ; ')
-    $('.sum').html('🐇+🐉：' + calculateSum(joeCost.concat(yaCost)) + ' ; ')
+    $('.Y').html('🐇：' + calculateSum(yaCost).toFixed(2) + ' ; ')
+    $('.W').html('🐉：' + calculateSum(joeCost).toFixed(2) + ' ; ')
+    $('.sum').html('🐇+🐉：' + calculateSum(joeCost.concat(yaCost)).toFixed(2) + ' ; ')
     
     window.addEventListener('resize', myChart.resize);
     init()
