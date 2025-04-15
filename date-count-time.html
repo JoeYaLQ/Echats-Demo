@@ -19,12 +19,26 @@
 
     <div id="headerContent"></div>
     <script type="text/javascript">  $("#headerContent").load("./header.html");  </script>
-    <div id="container" style="height: 500px;width: 100%;padding: 30px 20px;"></div>
+    <div id="container" style="height: 500px;width: 100%;padding: 20px;"></div>
     <div class="px-4 pb-5">
         <h3 class="fw-bold">当前显示数据：</h3>
-        <p class="operationDate"></p>
-        <p class="cumDays"></p>
-        <p class="avg"></p> 
+        
+        <!-- 以下为添加的下拉框及其功能代码，嵌入你的原有结构中 -->
+        <div class="mt-2" style="width: 200px;">
+            <label for="dateRange" class="form-label fw-bold">选择时间范围：</label>
+            <select class="form-select mb-2" id="dateRange">
+                <option value="1">最近一个月</option>
+                <option value="3">最近三个月</option>
+                <option value="6">最近半年</option>
+                <option value="12">最近一年</option>
+                <option value="all" selected>全部</option>
+            </select>
+        </div>
+
+        <p class="fw-bold mb-1">详情数据：</p>
+        <p class="operationDate mb-1"></p>
+        <p class="cumDays mb-1"></p>
+        <p class="avg mb-1"></p> 
         <p class="lastTime"></p>
         <span class="W p-2 border border-2 border-primary rounded-3"></span>
         <span class="Y p-2 border border-2 border-primary rounded-3 mx-3"></span>
@@ -33,16 +47,15 @@
         <br>
         <span class="sum p-2 border border-2 border-primary rounded-3"></span>
     </div>
-    
 <script type="text/javascript">
     var dom = document.getElementById('container');
     // 操作时间
     var operationDate = [
         '2024-10-04','2024-10-05','2024-10-06','2024-10-10',
-        '2024-10-13 20:00:00','2024-10-17 1:00:00','2024-10-23 23:00:00',
-        '2024-11-02 01:39:59','2024-11-02 19:59:59', '2024-11-03 15:29:59',
+        '2024-10-13 20:00:00','2024-10-17 01:00:00','2024-10-23 23:00:00',
+        '2024-11-02 01:39:59','2024-11-02 19:59:59','2024-11-03 15:29:59',
         '2024-11-04 00:53:59','2024-11-05 00:53:59','2024-11-05 22:33:59',
-        '2024-11-10 03:33:59','2024-11-10 15:33:59','2024-11-15 5:33:59',
+        '2024-11-10 03:33:59','2024-11-10 15:33:59','2024-11-15 05:33:59',
         '2024-11-16 00:33:59','2024-11-23 03:33:59','2024-11-24 22:53:59',
         '2024-11-26 00:23:59','2024-11-30 15:03:59','2024-12-01 11:13:59',
         '2024-12-02 00:13:59','2024-12-07 10:55:59','2024-12-09 00:13:59',
@@ -52,16 +65,17 @@
         '2025-01-05 11:09:59','2025-01-06 03:30:59','2025-01-11 01:30:59',
         '2025-01-15 14:00:59','2025-01-18 16:09:59','2025-01-18 15:30:59',
         '2025-01-20 00:30:59','2025-01-22 00:30:59','2025-01-28 02:30:59',
-        '2025-01-30 02:30:59','2025-01-31 02:30:59','2025-02-1 02:30:59',
+        '2025-01-30 02:30:59','2025-01-31 02:30:59','2025-02-01 02:30:59',
         '2025-02-02 02:30:59','2025-02-15 10:30:59','2025-02-16 02:30:59',
-        '2025-02-16 15:30:59','2025-02-20 1:00:19','2025-02-22 10:30:59',
-        '2025-02-23 10:30:59','2025-02-24 00:30:59','2025-03-1 01:30:59',
-        '2025-03-6 20:30:59','2025-03-9 03:30:59','2025-03-15 01:30:59',
+        '2025-02-16 15:30:59','2025-02-20 01:00:19','2025-02-22 10:30:59',
+        '2025-02-23 10:30:59','2025-02-24 00:30:59','2025-03-01 01:30:59',
+        '2025-03-06 20:30:59','2025-03-09 03:30:59','2025-03-15 01:30:59',
         '2025-03-15 10:13:59','2025-03-16 17:30:59','2025-03-17 00:39:59',
         '2025-03-23 02:39:59','2025-03-29 00:39:59','2025-03-30 02:39:59',
         '2025-03-31 02:39:59','2025-04-02 01:39:59','2025-04-05 02:39:59',
         '2025-04-09 00:39:59','2025-04-10 22:39:59',
     ];
+    // console.log(`output->`,operationDate.length)
     // 时长数据
     var duration =[
         { value: 0.75, itemStyle: { color: '#f12edf' }},
@@ -172,42 +186,122 @@
             },
         ]
     };
-    myChart.setOption(option);
-    // 更改P标签的内容
-    var ya = 0;
-    var wy = 0;
-    var wangY = 0;
+    /*** 
+     * 
+     * 原始 
+     * 
+    ***/
+    // myChart.setOption(option);
+    // // 更改P标签的内容
+    // var ya = 0;
+    // var wy = 0;
+    // var wangY = 0;
 
-    duration.forEach(item => {
-        if (typeof item === 'object' && item.itemStyle && item.itemStyle.color) {
-            if (item.itemStyle.color === '#f12edf') {
-                ya++;
-            } else if (item.itemStyle.color === '#1ba035') {
-                wy++;
-            } else if (item.itemStyle.color === '#adb5bd') {
-                wangY++;
+    // duration.forEach(item => {
+    //     if (typeof item === 'object' && item.itemStyle && item.itemStyle.color) {
+    //         if (item.itemStyle.color === '#f12edf') {
+    //             ya++;
+    //         } else if (item.itemStyle.color === '#1ba035') {
+    //             wy++;
+    //         } else if (item.itemStyle.color === '#adb5bd') {
+    //             wangY++;
+    //         }
+    //     }
+    // });
+    // // const ya = duration.filter(item => typeof item === 'object' && item !== null).length;
+    // console.log(`output->ya `,ya,operationDate.length )
+    // const wang = operationDate.length - ya - wy - wangY;
+    // const sum = operationDate.length - wangY
+    // // $('.operationDate').html('时间段：' + operationDate[0] + ' To ' + nowTime)
+
+    // $('.operationDate').html('Duration：' + operationDate[0] + ' to ' + dayjs().format("YYYY-MM-DD") + ' ; ' )
+    // $('.cumDays').html('Cumulative days：' + dayjs().diff(operationDate[0],'day') + ' ; ' )
+    // $('.avg').html('SVG：' + dayjs().diff(operationDate[0],'day') / sum + ' ; ')
+    // // 距离上一次时间间隔 用 dayjs把operationDate.at(-1)的值转换为时间对象在进行格式化处理，计算其差值
+    // $('.lastTime').html('lastTime：' + dayjs().diff(dayjs(operationDate.at(-1)).format('YYYY-MM-DD'),'day') + ' ; ')
+    // $('.Y').html('🐇：' + ya + ' ; ')
+    // $('.W').html('🐉：' + wang + ' ; ')
+    // $('.nS').html('♥️：' + wangY + ' ; ')
+    // $('.sum').html('🐇+🐉+😴：' + sum + ' ; ')
+    // $('.dream').html('😴：' + wy + ' ; ')
+    
+    // window.addEventListener('resize', myChart.resize);
+    // init()
+
+    /*** 
+     * 
+     * GPT Select
+     * 
+    ***/
+    myChart.setOption(option);
+    updateInfo(operationDate, duration);
+
+    // 监听窗口变化自适应图表
+    window.addEventListener('resize', myChart.resize);
+
+    // 下拉框筛选逻辑
+    $('#dateRange').on('change', function () {
+        const months = $(this).val();
+        const now = dayjs();
+
+        let filteredDates = [];
+        let filteredDurations = [];
+
+        if (months === 'all') {
+            filteredDates = operationDate;
+            filteredDurations = duration;
+        } else {
+            const start = now.subtract(parseInt(months), 'month');
+            for (let i = 0; i < operationDate.length; i++) {
+                const date = dayjs(operationDate[i]);
+                if (date.isAfter(start)) {
+                    filteredDates.push(operationDate[i]);
+                    filteredDurations.push(duration[i]);
+                }
             }
         }
-    });
-    // const ya = duration.filter(item => typeof item === 'object' && item !== null).length;
-    console.log(`output->ya `,ya,operationDate.length )
-    const wang = operationDate.length - ya - wy - wangY;
-    const sum = operationDate.length - wangY
-    // $('.operationDate').html('时间段：' + operationDate[0] + ' To ' + nowTime)
 
-    $('.operationDate').html('Duration：' + operationDate[0] + ' to ' + dayjs().format("YYYY-MM-DD") + ' ; ' )
-    $('.cumDays').html('Cumulative days：' + dayjs().diff(operationDate[0],'day') + ' ; ' )
-    $('.avg').html('SVG：' + dayjs().diff(operationDate[0],'day') / sum + ' ; ')
-    // 距离上一次时间间隔 用 dayjs把operationDate.at(-1)的值转换为时间对象在进行格式化处理，计算其差值
-    $('.lastTime').html('lastTime：' + dayjs().diff(dayjs(operationDate.at(-1)).format('YYYY-MM-DD'),'day') + ' ; ')
-    $('.Y').html('🐇：' + ya + ' ; ')
-    $('.W').html('🐉：' + wang + ' ; ')
-    $('.nS').html('♥️：' + wangY + ' ; ')
-    $('.sum').html('🐇+🐉+😴：' + sum + ' ; ')
-    $('.dream').html('😴：' + wy + ' ; ')
-    
-    window.addEventListener('resize', myChart.resize);
-    init()
+        myChart.setOption({
+            xAxis: {
+                data: filteredDates
+            },
+            series: [{
+                data: filteredDurations
+            }]
+        });
+
+        updateInfo(filteredDates, filteredDurations);
+    });
+
+    // 信息面板更新函数
+    function updateInfo(dates, durations) {
+        let ya = 0, wy = 0, wangY = 0;
+
+        durations.forEach(item => {
+            if (typeof item === 'object' && item.itemStyle?.color) {
+                if (item.itemStyle.color === '#f12edf') ya++;
+                else if (item.itemStyle.color === '#1ba035') wy++;
+                else if (item.itemStyle.color === '#adb5bd') wangY++;
+            }
+        });
+
+        const wang = dates.length - ya - wy - wangY;
+        const sum = dates.length - wangY;
+
+        const startDate = dates[0] || '-';
+        const endDate = dayjs().format("YYYY-MM-DD");
+
+        $('.operationDate').html('Duration：' + startDate + ' to ' + endDate + ' ; ');
+        $('.cumDays').html('Cumulative days：' + (dates[0] ? dayjs().diff(dayjs(startDate), 'day') : 0) + ' ; ');
+        $('.avg').html('SVG：' + (sum ? (dayjs().diff(dayjs(startDate), 'day') / sum).toFixed(2) : 0) + ' ; ');
+        $('.lastTime').html('lastTime：' + (dates.length ? dayjs().diff(dayjs(dates.at(-1)).format('YYYY-MM-DD'), 'day') : 0) + ' ; ');
+        $('.Y').html('🐇：' + ya + ' ; ');
+        $('.W').html('🐉：' + wang + ' ; ');
+        $('.nS').html('♥️：' + wangY + ' ; ');
+        $('.sum').html('🐇+🐉+😴：' + sum + ' ; ');
+        $('.dream').html('😴：' + wy + ' ; ');
+    }
+
 </script>
 </body>
 </html>
