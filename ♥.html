@@ -54,10 +54,10 @@
         // 原始数据
         const originalCostDate = [
             '24.12.27','25.1.3','25.1.17','25.2.16','25.2.23','25.3.14',
-            '25.3.28','25.4.3','25.4.18','25.4.30',
+            '25.3.28','25.4.3','25.4.18','25.4.30','25.5.16',
         ];
-        const originalYaCost = [350,500,857.75,473.8,363,349,301.3,765.11,306.4,940];
-        const originalJoeCost = [190,350,160,294.1,160.67,129.3,164.56,353.85,285.44,645.41];
+        const originalYaCost = [350,500,857.75,473.8,363,349,301.3,765.11,306.4,940,342.5];
+        const originalJoeCost = [190,350,160,294.1,160.67,129.3,164.56,353.85,285.44,645.41,131.77];
     
         let costDate = [...originalCostDate];
         let yaCost = [...originalYaCost];
@@ -170,7 +170,7 @@
             const lastDateStr = originalCostDate[originalCostDate.length - 1];
             const lastDate = parseDate(lastDateStr);
             const lastSunday = lastDate.day() === 0 ? lastDate : lastDate.add(7 - lastDate.day(), 'day');
-            const handDate = '2025-05-04';
+            const handDate = '';
             const daysSinceLast = dayjs().diff((!handDate ? lastSunday : handDate), 'day');
     
             $('.lastTime').html('Since the last time we met：' + daysSinceLast + ' day; ')
