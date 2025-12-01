@@ -9,6 +9,17 @@
   <script src="./static/js/jquery-3.6.0.js"></script>
   <script src="./static/js/echarts.min.js"></script>
   <style>
+    @media screen and (max-width: 991.8px) {
+      .b-m {
+        border-bottom: 1px solid #ccc;
+      }
+      
+    }
+    @media screen and (min-width: 992px) { 
+    .b-m {
+        border-bottom: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -21,16 +32,16 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-          <li class="nav-item">
+          <li class="nav-item b-m">
             <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item b-m">
             <a class="nav-link" href="./EchartsLine.html">Line</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item b-m">
             <a class="nav-link" href="./date-count-time.html">💧</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item b-m">
             <a class="nav-link" href="./♥.html">💴</a>
           </li>
           <!-- <li class="nav-item dropdown">
