@@ -41,8 +41,12 @@
         <p class="avg mb-1"></p> 
         <p class="lastTime"></p>
         <span class="W p-2 border border-2 border-primary rounded-3"></span>
-        <span class="Y p-2 border border-2 border-primary rounded-3 mx-3"></span>
-        <span class="dream p-2 border border-2 border-primary rounded-3 mx-3">😴：1 ;</span>
+        <span class="Y p-2 border border-2 border-primary rounded-3 mx-1"></span>
+        <br>
+        <br>
+        <span class="hand p-2 border border-2 border-primary rounded-3" onclick="onHandClick()">🙋‍♀️：1 ;</span>
+        <span class="mS p-2 border border-2 border-primary rounded-3 mx-1">♥️：1 ;</span>
+        <span class="dream p-2 border border-2 border-primary rounded-3">😴：1 ;</span>
         <br>
         <br>
         <span class="sum p-2 border border-2 border-primary rounded-3"></span>
@@ -99,10 +103,12 @@
         '2025-10-12 03:30:59','2025-10-30 00:30:59','2025-11-04 00:54:59',
         '2025-11-08 01:30:59','2025-11-09 01:30:59','2025-11-09 15:54:59',
         '2025-11-14 01:30:59','2025-11-15 01:30:59','2025-11-18 01:30:59',
-        '2025-11-22 23:30:59','2025-11-24 01:30:59',
+        '2025-11-22 23:30:59','2025-11-24 01:30:59','2025-11-25 03:30:59',
+        '2025-11-26 20:13:59','2025-11-28 21:13:59','2025-12-02 01:13:59',
+        '2025-12-06 17:13:59','2025-12-10 21:13:59',
     ];
     // console.log(`output->`,operationDate.length)
-    // 时长数据
+    // 时长数据 （总）
     var duration =[
         { value: 0.75, itemStyle: { color: '#f12edf' }},
         { value: 0.8, itemStyle: { color: '#f12edf' }},
@@ -150,7 +156,7 @@
         -0.7,-1,-1,
         { value: 0.8, itemStyle: { color: '#f12edf' }},
         { value: 0.8, itemStyle: { color: '#adb5bd' }},
-        { value: 0.8, itemStyle: { color: '#f12edf' }},//（hand）
+        { value: 0.8, itemStyle: { color: '#f1aeb5' }},//（hand）
         -1,//(一人一半)
         -0.3,
         { value: 0.5, itemStyle: { color: '#f12edf' }},
@@ -182,8 +188,8 @@
         { value: 0.8, itemStyle: { color: '#f12edf' }},
         { value: 0.8, itemStyle: { color: '#f12edf' }},
         -1,
-        { value: 2.8, itemStyle: { color: '#f12edf' }},//（hand）
-        { value: 0.8, itemStyle: { color: '#f12edf' }},//（hand）
+        { value: 2.8, itemStyle: { color: '#f1aeb5' }},//（hand）
+        { value: 0.8, itemStyle: { color: '#f1aeb5' }},//（hand）
         -1,-1,-1,
         { value: 0.3, itemStyle: { color: '#f12edf' }},
         { value: 0.6, itemStyle: { color: '#adb5bd' }},
@@ -196,11 +202,18 @@
         -1,-0.8,-0.5,-1,-1,-1,
         { value: 0.5, itemStyle: { color: '#f12edf' }},
         { value: 0.8, itemStyle: { color: '#f12edf' }},
-        { value: 1, itemStyle: { color: '#f12edf' }},//（hand）
+        { value: 1, itemStyle: { color: '#f1aeb5' }},//（hand）
         -1,-1,-1.5,
-        { value: 0.8, itemStyle: { color: '#f12edf' }},//（hand）
-        -1,
-        // { value: 0.8, itemStyle: { color: '#f12edf' }},
+        { value: 0.8, itemStyle: { color: '#f1aeb5' }},//（hand）
+        -1,-0.5,-0.5,-1,-1,-1,-1,
+    ];
+    // hand data
+    var handData =[
+        { value: 0.8, itemStyle: { color: '#f1aeb5' }},//（hand）
+        { value: 2.8, itemStyle: { color: '#f1aeb5' }},//（hand）
+        { value: 0.8, itemStyle: { color: '#f1aeb5' }},//（hand）
+        { value: 1, itemStyle: { color: '#f1aeb5' }},//（hand）
+        { value: 0.8, itemStyle: { color: '#f1aeb5' }},//（hand）
     ];
     console.log(`output->`,duration)
     var myChart = echarts.init(dom, null, {
@@ -268,53 +281,7 @@
             },
         ]
     };
-    /*** 
-     * 
-     * 原始 
-     * 
-    ***/
-    // myChart.setOption(option);
-    // // 更改P标签的内容
-    // var ya = 0;
-    // var wy = 0;
-    // var wangY = 0;
-
-    // duration.forEach(item => {
-    //     if (typeof item === 'object' && item.itemStyle && item.itemStyle.color) {
-    //         if (item.itemStyle.color === '#f12edf') {
-    //             ya++;
-    //         } else if (item.itemStyle.color === '#1ba035') {
-    //             wy++;
-    //         } else if (item.itemStyle.color === '#adb5bd') {
-    //             wangY++;
-    //         }
-    //     }
-    // });
-    // // const ya = duration.filter(item => typeof item === 'object' && item !== null).length;
-    // console.log(`output->ya `,ya,operationDate.length )
-    // const wang = operationDate.length - ya - wy - wangY;
-    // const sum = operationDate.length - wangY
-    // // $('.operationDate').html('时间段：' + operationDate[0] + ' To ' + nowTime)
-
-    // $('.operationDate').html('Duration：' + operationDate[0] + ' to ' + dayjs().format("YYYY-MM-DD") + ' ; ' )
-    // $('.cumDays').html('Cumulative days：' + dayjs().diff(operationDate[0],'day') + ' ; ' )
-    // $('.avg').html('SVG：' + dayjs().diff(operationDate[0],'day') / sum + ' ; ')
-    // // 距离上一次时间间隔 用 dayjs把operationDate.at(-1)的值转换为时间对象在进行格式化处理，计算其差值
-    // $('.lastTime').html('lastTime：' + dayjs().diff(dayjs(operationDate.at(-1)).format('YYYY-MM-DD'),'day') + ' ; ')
-    // $('.Y').html('🐇：' + ya + ' ; ')
-    // $('.W').html('🐉：' + wang + ' ; ')
-    // $('.nS').html('♥️：' + wangY + ' ; ')
-    // $('.sum').html('🐇+🐉+😴：' + sum + ' ; ')
-    // $('.dream').html('😴：' + wy + ' ; ')
     
-    // window.addEventListener('resize', myChart.resize);
-    // init()
-
-    /*** 
-     * 
-     * GPT Select
-     * 
-    ***/
     myChart.setOption(option);
     updateInfo(operationDate, duration);
 
@@ -357,17 +324,18 @@
 
     // 信息面板更新函数
     function updateInfo(dates, durations) {
-        let ya = 0, wy = 0, wangY = 0;
+        let ya = 0, wy = 0, wangY = 0; hand = 0;
 
         durations.forEach(item => {
             if (typeof item === 'object' && item.itemStyle?.color) {
                 if (item.itemStyle.color === '#f12edf') ya++;
                 else if (item.itemStyle.color === '#1ba035') wy++;
                 else if (item.itemStyle.color === '#adb5bd') wangY++;
+                else if (item.itemStyle.color === '#f1aeb5') hand++;
             }
         });
 
-        const wang = dates.length - ya - wy - wangY;
+        const wang = dates.length - ya - wy - wangY - hand;
         const sum = dates.length - wangY;
 
         const startDate = dates[0] || '-';
@@ -379,11 +347,24 @@
         $('.lastTime').html('lastTime：' + (dates.length ? dayjs().diff(dayjs(dates.at(-1)).format('YYYY-MM-DD'), 'day') : 0) + ' ; ');
         $('.Y').html('🐇：' + ya + ' ; ');
         $('.W').html('🐉：' + wang + ' ; ');
-        $('.nS').html('♥️：' + wangY + ' ; ');
-        $('.sum').html('🐇+🐉+😴：' + sum + ' ; ');
+        $('.mS').html('♥️：' + wangY + ' ; ');
+        $('.hand').html('🙋‍♀️：' + hand + ' ; ');
+        $('.sum').html('🐇+🐉+🙋‍♀️：' + sum + ' ; ');
         $('.dream').html('😴：' + wy + ' ; ');
     }
-
+    // 
+    function onHandClick() {
+        alert('🙋‍♀️，待定~')
+        // myChart.setOption({
+        //     xAxis: {
+        //         data: filteredDates
+        //     },
+        //     series: [{
+        //         data: filteredDurations
+        //     }]
+        // });
+        // handData
+    }
 </script>
 </body>
 </html>
