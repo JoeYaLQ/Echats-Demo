@@ -105,7 +105,7 @@
         '2025-11-14 01:30:59','2025-11-15 01:30:59','2025-11-18 01:30:59',
         '2025-11-22 23:30:59','2025-11-24 01:30:59','2025-11-25 03:30:59',
         '2025-11-26 20:13:59','2025-11-28 21:13:59','2025-12-02 01:13:59',
-        '2025-12-06 17:13:59','2025-12-10 21:13:59',
+        '2025-12-06 17:13:59','2025-12-10 21:13:59','2025-12-17 04:13:59',
     ];
     // console.log(`output->`,operationDate.length)
     // 时长数据 （总）
@@ -206,6 +206,7 @@
         -1,-1,-1.5,
         { value: 0.8, itemStyle: { color: '#f1aeb5' }},//（hand）
         -1,-0.5,-0.5,-1,-1,-1,-1,
+        { value: 1, itemStyle: { color: '#1ba035' }},
     ];
     // hand data
     var handData =[
@@ -336,7 +337,7 @@
         });
 
         const wang = dates.length - ya - wy - wangY - hand;
-        const sum = dates.length - wangY;
+        const sum = dates.length - wangY -wy;
 
         const startDate = dates[0] || '-';
         const endDate = dayjs().format("YYYY-MM-DD");
@@ -354,7 +355,7 @@
     }
     // 
     function onHandClick() {
-        alert('🙋‍♀️，待定~')
+        // alert('🙋‍♀️，待定~')
         // myChart.setOption({
         //     xAxis: {
         //         data: filteredDates
